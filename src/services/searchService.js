@@ -9,8 +9,8 @@ const searchService = {
       },
     });
   },
-  getSearchPost: function (valueSearch) {
-    return this.getAll({ per_page: 3, page: 1, search: valueSearch });
+  getSearchPost: function (valueSearch, page = 1) {
+    return this.getAll({ per_page: 3, page: page, search: valueSearch });
   },
 };
 

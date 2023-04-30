@@ -1,14 +1,14 @@
 import Input from "../shared/Input";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-
 import { useDispatch } from "react-redux";
-import { actFetchSearchPostsAsync } from "../../store/searchPost/action";
+import { actSetValueInput } from "../../store/searchPost/action";
 
 function HeaderSearch() {
   const history = useHistory();
   const [queryStr, setQueryStr] = useState("");
   let dispatch = useDispatch();
+
   function handleOnChange(evt) {
     setQueryStr(evt.target.value);
   }
@@ -19,7 +19,7 @@ function HeaderSearch() {
       return;
     }
     const queryStrURI = encodeURIComponent(queryStr);
-    dispatch(actFetchSearchPostsAsync(queryStr));
+    dispatch(actSetValueInput(queryStrURI));
     history.push("/search?q=" + queryStrURI);
   }
 

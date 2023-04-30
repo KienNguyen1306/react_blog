@@ -8,56 +8,53 @@ import { actFetchSearchPostsAsync } from "../store/searchPost/action";
 
 function SearchPage() {
   const queryStr = getQueryStr("q");
-  console.log("queryStr", queryStr);
+ 
 
-  let { searchPost } = useSelector((state) => state.searchReducer);
-  console.log("searchPost", searchPost);
-  // let dispatch = useDispatch();
+  let dispatch = useDispatch();
+  let { searchPost, curentPage, totalpages } = useSelector(
+    (state) => state.searchReducer
+  );
+  
 
-  // useEffect(() => {
-  //   dispatch(actFetchSearchPostsAsync(queryStr));
-  //   console.log(queryStr);
-  // }, [dispatch, queryStr]);
+  useEffect(() => {
+    dispatch(actFetchSearchPostsAsync(queryStr));
+  }, [dispatch, queryStr]);
+
+  function handleLoadMore() {
+    dispatch(actFetchSearchPostsAsync(queryStr, curentPage + 1));
+  }
 
   return (
     <div className="articles-list section">
       <div className="tcl-container">
         <MainTitle type="search">
-          10 kết quả tìm kiếm với từ khóa "{queryStr}"
+          {searchPost.length} kết quả tìm kiếm với từ khóa "{queryStr}"
         </MainTitle>
 
         <div className="tcl-row tcl-jc-center">
-          <div className="tcl-col-12 tcl-col-md-8">
-            <ArticleItem
-              isStyleCard
-              isShowCategoies
-              isShowAvatar={false}
-              isShowDesc={false}
-            />
-          </div>
-          <div className="tcl-col-12 tcl-col-md-8">
-            <ArticleItem
-              isStyleCard
-              isShowCategoies
-              isShowAvatar={false}
-              isShowDesc={false}
-            />
-          </div>
-          <div className="tcl-col-12 tcl-col-md-8">
-            <ArticleItem
-              isStyleCard
-              isShowCategoies
-              isShowAvatar={false}
-              isShowDesc={false}
-            />
-          </div>
+          {searchPost.map((item) => {
+            return (
+              <div key={item.id} className="tcl-col-12 tcl-col-md-8">
+                <ArticleItem
+                  item={item}
+                  isStyleCard
+                  isShowCategoies
+                  isShowAvatar={false}
+                  isShowDesc={false}
+                />
+              </div>
+            );
+          })}
         </div>
-
-        <div className="text-center">
-          <Button type="primary" size="large">
-            Tải thêm
-          </Button>
-        </div>
+        {totalpages > 1 && (
+          <div className="text-center">
+            {curentPage !== totalpages && (
+              <Button type="primary" size="large" onClick={handleLoadMore}>
+                Tải thêm
+              </Button>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );
