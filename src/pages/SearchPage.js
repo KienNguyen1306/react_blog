@@ -6,24 +6,31 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { actFetchSearchPostsAsync } from "../store/searchPost/action";
 
+import { useLocation } from "react-router-dom";
+
 function SearchPage() {
   const queryStr = getQueryStr("q");
- 
+  const location = useLocation();
+
 
   let dispatch = useDispatch();
   let { searchPost, curentPage, totalpages } = useSelector(
     (state) => state.searchReducer
   );
-  
+
 
   useEffect(() => {
     dispatch(actFetchSearchPostsAsync(queryStr));
-  }, [dispatch, queryStr]);
+  }, [dispatch, queryStr, location.search]);
+
+
 
   function handleLoadMore() {
     dispatch(actFetchSearchPostsAsync(queryStr, curentPage + 1));
   }
 
+
+  
   return (
     <div className="articles-list section">
       <div className="tcl-container">

@@ -1,7 +1,6 @@
 import { mappingPostData } from "../../helpers";
 import searchService from "../../services//searchService";
 export const ACT_FETCH_SEARCH_POST = "ACT_FETCH_SEARCH_POST";
-export const ACT_VALUE_INPUT = "ACT_VALUE_INPUT";
 
 // search post
 export function actFetchSearchPosts(posts, page, totalpages) {
@@ -20,10 +19,3 @@ export function actFetchSearchPostsAsync(inputValue, page = 1) {
   };
 }
 
-// value input
-export function actSetValueInput(value) {
-  return {
-    type: ACT_VALUE_INPUT,
-    payload: value,
-  };
-}

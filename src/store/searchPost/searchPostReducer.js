@@ -1,4 +1,4 @@
-import { ACT_FETCH_SEARCH_POST, ACT_VALUE_INPUT } from "./action";
+import { ACT_FETCH_SEARCH_POST } from "./action";
 
 const initState = {
   valueInput: "",
@@ -15,11 +15,6 @@ function searchReducer(state = initState, action) {
         curentPage: action.payload.page,
         totalpages: action.payload.totalpages,
         searchPost: action.payload.posts,
-      };
-    case ACT_VALUE_INPUT:
-      return {
-        ...state,
-        valueInput: action.payload,
       };
     default:
       return state;
