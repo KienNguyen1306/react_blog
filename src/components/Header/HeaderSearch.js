@@ -2,12 +2,9 @@ import Input from "../shared/Input";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 
-
-
 function HeaderSearch() {
   const history = useHistory();
   const [queryStr, setQueryStr] = useState("");
-
 
   function handleOnChange(evt) {
     setQueryStr(evt.target.value);
@@ -20,7 +17,6 @@ function HeaderSearch() {
     }
     const queryStrURI = encodeURIComponent(queryStr);
     history.push("/search?q=" + queryStrURI);
-    setQueryStr("");
   }
 
   return (

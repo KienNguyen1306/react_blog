@@ -1,124 +1,50 @@
-import './comments.css'
+import { useEffect } from "react";
+import PostDetaiCommentItem from "./PostDetaiCommentItem";
+import PostDetailCommemtForm from "./PostDetailCommemtForm";
+import "./comments.css";
+import { useDispatch, useSelector } from "react-redux";
+import { actFetchCommentsAsync } from "../../store/comment/actions";
+import PostDetailCommentAction from "./PostDetailCommentAction";
 
 function PostDetailComments() {
+  const postID = useSelector((state) => state.POST.postDetail.id);
+  const { list, currentPage, totalItem } = useSelector(
+    (state) => state.COMMENT.dataParentComment
+  );
+
+  let restTotal = totalItem - list.length;
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(
+      actFetchCommentsAsync({ currentPage: 1, parent: 0, postId: postID })
+    );
+  }, [postID]);
+
   return (
-    <div className="post-detail__comments">
-      <div className="comments__form">
-        <div className="comments__form--control">
-          <div className="comments__section--avatar">
-            <a href="/">
-              <img src="/assets/images/avatar1.jpg" alt="" />
-            </a>
-          </div>
-          <textarea />
-        </div>
-        <div className="text-right">
-          <button className="btn btn-default">Submit</button>
-        </div>
-      </div>
-      <p>20 Comments</p>
-      <ul className="comments">
-        {/* Comment 1 */}
-        <li className="item">
-          <div className="comments__section">
-            <div className="comments__section--avatar">
-              <a href="/">
-                <img src="/assets/images/avatar1.jpg" alt="" />
-              </a>
-            </div>
-            <div className="comments__section--content">
-              <a href="/" className="comments__section--user">John Smith</a>
-              <p className="comments__section--time">2 minutes ago</p>
-              <p className="comments__section--text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nesciunt sequi odit exercitationem maiores, iusto unde quibusdam! Ullam nisi iste reprehenderit, expedita nam ad. Nisi hic at voluptate sint incidunt aut?</p>
-              {/* <i class="ion-reply comments__section--reply"></i> */}
-            </div>
-          </div>
-          {/* Reply Comments */}
+    <>
+      <div className="post-detail__comments">
+        <PostDetailCommemtForm />
+        <p>{totalItem} Comments</p>
+
+        {list.length > 0 && (
           <ul className="comments">
-            <li className="item">
-              <div className="comments__section">
-                <div className="comments__section--avatar">
-                  <a href="/">
-                    <img src="/assets/images/avatar3.jpg" alt="" />
-                  </a>
-                </div>
-                <div className="comments__section--content">
-                  <a href="/" className="comments__section--user">John Smith</a>
-                  <p className="comments__section--time">2 minutes ago</p>
-                  <p className="comments__section--text">Lorem ipsum dolor sit, amet consectetur adipisicing elit?</p>
-                  {/* <i class="ion-reply comments__section--reply"></i> */}
-                </div>
-              </div>
-            </li>
-            <li className="item">
-              <div className="comments__section">
-                <div className="comments__section--avatar">
-                  <a href="/">
-                    <img src="/assets/images/avatar4.jpg" alt="" />
-                  </a>
-                </div>
-                <div className="comments__section--content">
-                  <a href="/" className="comments__section--user">John Smith</a>
-                  <p className="comments__section--time">2 minutes ago</p>
-                  <p className="comments__section--text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nesciunt sequi odit exercitationem ma?</p>
-                  {/* <i class="ion-reply comments__section--reply"></i> */}
-                </div>
-              </div>
-            </li>
+            {list.map((item) => {
+              return <PostDetaiCommentItem key={item.id} data={item} />;
+            })}
           </ul>
-          {/* Reply form */}
-          <div className="comments__form">
-            <div className="comments__form--control">
-              <div className="comments__section--avatar">
-                <a href="/">
-                  <img src="/assets/images/avatar1.jpg" alt="" />
-                </a>
-              </div>
-              <textarea />
-            </div>
-            <div className="text-right">
-              <button className="btn btn-default">Submit</button>
-            </div>
-          </div>
-        </li>
-        {/* Comment 2 */}
-        <li className="item">
-          <div className="comments__section">
-            <div className="comments__section--avatar">
-              <a href="/">
-                <img src="/assets/images/avatar2.jpg" alt="" />
-              </a>
-            </div>
-            <div className="comments__section--content">
-              <a href="/" className="comments__section--user">John Smith</a>
-              <p className="comments__section--time">2 minutes ago</p>
-              <p className="comments__section--text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nesciunt sequi odit exercitationem maiores?</p>
-              {/* <i class="ion-reply comments__section--reply"></i> */}
-            </div>
-          </div>
-          <div className="comments__hidden">
-            <a href="/"><i className="icons ion-ios-undo" /> Xem thêm 2 câu trả lời</a>
-          </div>
-        </li>
-        {/* Comment 3 */}
-        <li className="item">
-          <div className="comments__section">
-            <div className="comments__section--avatar">
-              <a href="/">
-                <img src="/assets/images/avatar3.jpg" alt="" />
-              </a>
-            </div>
-            <div className="comments__section--content">
-              <a href="/" className="comments__section--user">John Smith</a>
-              <p className="comments__section--time">2 minutes ago</p>
-              <p className="comments__section--text">Lorem ipsum dolor sit, amet?</p>
-              {/* <i class="ion-reply comments__section--reply"></i> */}
-            </div>
-          </div>
-        </li>
-      </ul>
-    </div>
-  )
+        )}
+      </div>
+      {restTotal > 0 && (
+        <PostDetailCommentAction
+          restTotal={restTotal}
+          parent={0}
+          currentPage={currentPage}
+          className="load-comment"
+        />
+      )}
+    </>
+  );
 }
 
-export default PostDetailComments
+export default PostDetailComments;

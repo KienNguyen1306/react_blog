@@ -12,10 +12,13 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { useEffect } from "react";
 import { actFetchAllMenusAsync } from "./store/menus/action";
 import { actFetchAllCaterogyAsync } from "./store/caterogys/action";
+import { actFetchMeAsync } from "./store/user/action";
+import PostCaterogy from "./pages/PostCaterogy";
 
 function App() {
   let dispatch = useDispatch();
   useEffect(() => {
+    dispatch(actFetchMeAsync());
     dispatch(actFetchAllMenusAsync());
     dispatch(actFetchAllCaterogyAsync());
   }, [dispatch]);
@@ -26,6 +29,9 @@ function App() {
         <Switch>
           <Route path="/post/:slug">
             <PostDetailPage />
+          </Route>
+          <Route path="/caterogy/:slug">
+            <PostCaterogy />
           </Route>
           <Route path="/search">
             <SearchPage />

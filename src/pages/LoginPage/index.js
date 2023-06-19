@@ -1,9 +1,50 @@
-import './login.css'
-import { Link } from "react-router-dom"
-import Input from '../../components/shared/Input'
-import Button from '../../components/shared/Button'
+import "./login.css";
+import { Link, useHistory, useLocation } from "react-router-dom";
+import Input from "../../components/shared/Input";
+import Button from "../../components/shared/Button";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { actLoginAsync } from "../../store/user/action";
+import { getQueryStr } from "../../helpers";
 
 function LoginPage() {
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const location = useLocation();
+  const nextPage = getQueryStr("next", location.search);
+
+
+  const token = useSelector((state) => state.USER.token);
+
+  if (token) {
+    history.push("/");
+  }
+  const [dataForm, setDataForm] = useState({ username: "", password: "" });
+  const [message, setMessage] = useState("");
+
+  // handleOnchange
+  function handleOnchange(e) {
+    let { name, value } = e.target;
+    setDataForm({ ...dataForm, [name]: value });
+  }
+
+  // login
+  function handleLogin(e) {
+    e.preventDefault();
+    dispatch(actLoginAsync(dataForm)).then((res) => {
+      if (res.ok) {
+        if (nextPage) {
+          history.push(nextPage);
+        } else {
+          history.push("/");
+        }
+      } else {
+        setMessage(res.message);
+      }
+    });
+  }
+
   return (
     <main className="login">
       <div className="spacing" />
@@ -12,21 +53,28 @@ function LoginPage() {
           <div className="tcl-col-12 tcl-col-sm-6 block-center">
             <h1 className="form-title text-center">Đăng nhập</h1>
             <div className="form-login-register">
-              <form autoComplete="off">
-                <Input 
-                  label="Tên đăng nhập" 
+              <p className="error-message">{message}</p>
+              <form autoComplete="off" onSubmit={handleLogin}>
+                <Input
+                  name="username"
+                  label="Tên đăng nhập"
                   placeholder="Nhập tên đăng nhập ..."
                   autoComplete="off"
+                  onChange={handleOnchange}
                 />
-                <Input 
-                  type="password" 
-                  label="Mật khẩu" 
+                <Input
+                  name="password"
+                  type="password"
+                  label="Mật khẩu"
                   placeholder="Nhập mật khẩu của bạn ..."
                   autoComplete="new-password"
+                  onChange={handleOnchange}
                 />
 
                 <div className="d-flex tcl-jc-between tcl-ais-center">
-                  <Button type="primary" size="large">Đăng nhập</Button>
+                  <Button type="primary" size="large">
+                    Đăng nhập
+                  </Button>
                   <Link to="/register">Đăng ký</Link>
                 </div>
               </form>
@@ -36,8 +84,7 @@ function LoginPage() {
       </div>
       <div className="spacing" />
     </main>
-
-  )
+  );
 }
 
-export default LoginPage
+export default LoginPage;

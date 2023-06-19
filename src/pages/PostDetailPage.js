@@ -11,7 +11,9 @@ import { actFetchArticlesPostDetailAsync } from "../store/posts/actions";
 function PostDetailPage() {
   const [loading, Setloading] = useState(true);
   const { slug } = useParams();
-  let detailPost = useSelector((state) => state.postDetail);
+
+  let detailPost = useSelector((state) => state.POST.postDetail);
+
   let dispatch = useDispatch();
 
   useEffect(() => {

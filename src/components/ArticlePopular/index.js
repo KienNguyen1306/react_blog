@@ -3,7 +3,7 @@ import ArticleItem from "../ArticleItem";
 import "./popular-news-list.css";
 
 function ArticlePopular() {
-  let { listPopular } = useSelector((state) => state.listPopular);
+  let listPopular = useSelector((state) => state.POST.listPopular);
 
   return (
     <div className="popular-news section bg-white-blue">

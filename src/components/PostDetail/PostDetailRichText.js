@@ -1,7 +1,9 @@
-function PostDetailRichText({ desc }) {
+function PostDetailRichText({ content }) {
   return (
     <div className="rte">
-      <p>{desc}</p>
+      {/* <p>{content}</p> */}
+      <p dangerouslySetInnerHTML={{ __html: content }} />
+
       <h2>Emphasis</h2>
       <p>
         Emphasis, aka <i>italics</i>, with asterisks or <u>underscores</u>.

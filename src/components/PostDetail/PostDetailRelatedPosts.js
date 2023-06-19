@@ -1,14 +1,16 @@
-import ArticleRelated from "../ArticleItem/ArticleRelated"
+import { useSelector } from "react-redux";
+import ArticleRelated from "../ArticleItem/ArticleRelated";
 
 function PostDetailRelatedPosts() {
+  let relatedPost = useSelector((state) => state.POST.relatedPost);
   return (
     <div className="related-post">
       <h2 className="related-post__head">Related Posts</h2>
-      <ArticleRelated />
-      <ArticleRelated />
-      <ArticleRelated />
+      {relatedPost.map((item, index) => {
+        return <ArticleRelated key={index} item={item} />;
+      })}
     </div>
-  )
+  );
 }
 
-export default PostDetailRelatedPosts
+export default PostDetailRelatedPosts;

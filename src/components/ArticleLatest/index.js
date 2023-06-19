@@ -4,7 +4,7 @@ import MainTitle from "../shared/MainTitle";
 import { useSelector } from "react-redux";
 
 function ArticleLatest() {
-  let { listLatest } = useSelector((state) => state.listLatest);
+  let listLatest = useSelector((state) => state.POST.listLatest);
 
   return (
     <div className="latest-news section">

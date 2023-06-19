@@ -10,7 +10,7 @@ function PostDetailContent({ data }) {
         <img src={data.thumb} alt="blog-title" />
       </div>
       <div className="content-padding">
-        <PostDetailRichText desc={data.desc} />
+        <PostDetailRichText content={data.content} />
 
         <PostDetailTags />
 

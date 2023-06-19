@@ -1,45 +1,34 @@
-import Button from "../components/shared/Button";
 import ArticleItem from "../components/ArticleItem";
 import MainTitle from "../components/shared/MainTitle";
 import { getQueryStr } from "../helpers";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { actFetchSearchPostsAsync } from "../store/searchPost/action";
+import { actFetchArticlesPagingAsync } from "../store/posts/actions";
 
 import { useLocation } from "react-router-dom";
 
+import usePostPaging from "../hooks/usePostPaging";
+
 function SearchPage() {
-  const queryStr = getQueryStr("q");
   const location = useLocation();
-
-
+  const queryStr = getQueryStr("q", location.search);
+  const inputParam = { search: queryStr };
   let dispatch = useDispatch();
-  let { searchPost, curentPage, totalpages } = useSelector(
-    (state) => state.searchReducer
-  );
-
+  const { lists, renderButtonLoadMore, totalItem } = usePostPaging(inputParam);
 
   useEffect(() => {
-    dispatch(actFetchSearchPostsAsync(queryStr));
-  }, [dispatch, queryStr, location.search]);
+    dispatch(actFetchArticlesPagingAsync({ inputParam }));
+  }, [dispatch, queryStr]);
 
-
-
-  function handleLoadMore() {
-    dispatch(actFetchSearchPostsAsync(queryStr, curentPage + 1));
-  }
-
-
-  
   return (
     <div className="articles-list section">
       <div className="tcl-container">
         <MainTitle type="search">
-          {searchPost.length} kết quả tìm kiếm với từ khóa "{queryStr}"
+          {totalItem} kết quả tìm kiếm với từ khóa "{queryStr}"
         </MainTitle>
 
         <div className="tcl-row tcl-jc-center">
-          {searchPost.map((item) => {
+          {lists.map((item) => {
             return (
               <div key={item.id} className="tcl-col-12 tcl-col-md-8">
                 <ArticleItem
@@ -53,15 +42,7 @@ function SearchPage() {
             );
           })}
         </div>
-        {totalpages > 1 && (
-          <div className="text-center">
-            {curentPage !== totalpages && (
-              <Button type="primary" size="large" onClick={handleLoadMore}>
-                Tải thêm
-              </Button>
-            )}
-          </div>
-        )}
+        {renderButtonLoadMore()}
       </div>
     </div>
   );

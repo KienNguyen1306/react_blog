@@ -3,8 +3,8 @@ import "dayjs/locale/vi";
 import relativeTime from "dayjs/plugin/relativeTime";
 dayjs.extend(relativeTime);
 
-export function getQueryStr(name) {
-  return new URLSearchParams(window.location.search).get(name);
+export function getQueryStr(name, locationSearch) {
+  return new URLSearchParams(locationSearch).get(name);
 }
 
 export function formatDate(date) {
@@ -37,10 +37,12 @@ export function mappingPostDetain(item) {
     title: item.title.rendered,
     user: item.author_data,
     date: item.modified,
-    desc: item.excerpt.rendered.replace(/(<([^>]+)>)/gi, ""),
+    content: item.content.rendered,
     view: item.view_count,
     commentCount: item.comment_count,
     thumb: item.featured_media_url,
+    slug: item.slug,
+    author: item.author,
   };
 }
 
@@ -62,7 +64,22 @@ export function mappingCaterogyData(item) {
 export function mappingCaterogyToObject(array) {
   let res = {};
   for (let i = 0; i < array.length; i++) {
-    res[array[i].id] = { id: array[i].id, name: array[i].name };
+    res[array[i].id] = {
+      id: array[i].id,
+      name: array[i].name,
+      slug: array[i].slug,
+    };
   }
   return res;
+}
+
+export function mappingCommetData(item) {
+  return {
+    id: item.id,
+    comment: item.content.rendered,
+    userAvatar: item.author_avatar_urls["24"] || item.author_avatar_urls["48"],
+    userName: item.author_name,
+    replyCommentCount: item.comment_reply_count,
+    time: item.date_gmt,
+  };
 }

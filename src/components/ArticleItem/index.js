@@ -14,13 +14,12 @@ export default function ArticleItem({
   isShowCategoies = false,
   isShowAvatar = true,
   item,
+  highlightSearchTerm,
 }) {
   const classes = cls("article-item", {
     "style-card": isStyleCard,
     "style-row": isStyleRow,
   });
-
- 
 
   if (!item) return <></>;
 
@@ -28,9 +27,14 @@ export default function ArticleItem({
     <article className={classes}>
       <ArticleItemThumb image={item.thumb} />
       <div className="article-item__content">
-        {isShowCategoies && <ArticleItemCategories caterogies={item.categories}/>}
+        {isShowCategoies && (
+          <ArticleItemCategories caterogies={item.categories} />
+        )}
         {isShowCategoies && <ArticleItemStats view={item.view} />}
-        <ArticleItemTitle title={item.title} slug={item.slug} />
+        <ArticleItemTitle
+          title={item.title}
+          slug={item.slug}
+        />
         {isShowDesc && <ArticleItemDesc shortDesc={item.shortDesc} />}
         <ArticleItemInfo
           user={item.user}
