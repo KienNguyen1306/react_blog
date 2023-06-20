@@ -31,16 +31,26 @@ function HeaderMenus() {
         <ul className="header-nav__lists">{renderMenus(menus)}</ul>
         <ul className="header-nav__lists">
           <li className="user">
-            {currentUser && (
-              <>
-                <i className="icons ion-person" /> {currentUser.name}
-                <span onClick={handleLogout}>Đăng xuất</span>
-              </>
-            )}
             {!currentUser && (
               <Link to="/login">
                 <i className="icons ion-person" /> Tài khoản
               </Link>
+            )}
+            {currentUser && (
+              <>
+                <img
+                  className="avatar_user"
+                  src={currentUser.userAvatar}
+                  alt="avatar"
+                />
+                {currentUser.name}
+                <div className="action_user">
+                  <span onClick={handleLogout}>Đăng xuất</span>
+                  <Link to="/profile" className="profile">
+                    Profile
+                  </Link>
+                </div>
+              </>
             )}
           </li>
         </ul>

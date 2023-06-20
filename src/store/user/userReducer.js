@@ -1,4 +1,4 @@
-import { ACT_LOGIN, ACT_LOGOUT } from "./action";
+import { ACT_LOGIN, ACT_LOGOUT, ACT_UPLOAD_USER } from "./action";
 
 const initState = {
   token: localStorage.getItem("ACCESS_TOKEN"),
@@ -17,6 +17,8 @@ function userReducer(state = initState, action) {
     case ACT_LOGOUT:
       localStorage.removeItem("ACCESS_TOKEN");
       return { ...state, token: null, currentUser: null };
+    case ACT_UPLOAD_USER:
+      return { ...state, currentUser: action.payload };
     default:
       return state;
   }

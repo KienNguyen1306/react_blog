@@ -1,0 +1,79 @@
+.heading_profile {
+  text-align: center;
+  font-size: 2rem;
+  margin: 20px;
+}
+
+.profile {
+  margin: 20px;
+}
+
+.profile .body {
+  margin: 20px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.profile .left {
+  width: 50%;
+}
+
+.profile .right {
+  width: 50%;
+}
+
+.change_image {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  display: block;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  appearance: none;
+  font-size: inherit;
+  line-height: inherit;
+  border: 1px solid;
+  border-radius: 4px;
+  color: inherit;
+  background-color: transparent;
+  border: none;
+  background-color: #edf2f7;
+  outline: none;
+  margin-bottom: 20px;
+}
+
+.change_image .privewImage {
+  width: 250px;
+  height: 250px;
+  margin: 0 auto;
+  display: block;
+  object-fit: cover;
+  margin-top: 20px;
+  border-radius: 5px;
+}
+
+.change_image input::file-selector-button {
+  font-size: 0.9rem;
+  cursor: pointer;
+  background-color: #ffff;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+.change_image input::file-selector-button:hover {
+  color: #fff;
+  background-color: #5a67d8;
+}
+
+.error_change {
+  color: red;
+}
+
+.susscess_change {
+  color: #28a745;
+}
+
+.message {
+  margin-bottom: 20px;
+}

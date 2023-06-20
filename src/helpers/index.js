@@ -77,9 +77,20 @@ export function mappingCommetData(item) {
   return {
     id: item.id,
     comment: item.content.rendered,
-    userAvatar: item.author_avatar_urls["24"] || item.author_avatar_urls["48"],
+    userAvatar: item.author_data.avatar || item.author_avatar_urls["48"],
     userName: item.author_name,
     replyCommentCount: item.comment_reply_count,
     time: item.date_gmt,
+  };
+}
+
+export function mappingUser(data) {
+  return {
+    id: data.id,
+    userAvatar: data.simple_local_avatar.full,
+    media_id: data.simple_local_avatar.media_id,
+    name: data.name,
+    description: data.description,
+    nickname: data.nickname,
   };
 }

@@ -14,6 +14,7 @@ import { actFetchAllMenusAsync } from "./store/menus/action";
 import { actFetchAllCaterogyAsync } from "./store/caterogys/action";
 import { actFetchMeAsync } from "./store/user/action";
 import PostCaterogy from "./pages/PostCaterogy";
+import ProFilePage from "./pages/ProFilePage";
 
 function App() {
   let dispatch = useDispatch();
@@ -41,6 +42,9 @@ function App() {
           </Route>
           <Route path="/register">
             <RegisterPage />
+          </Route>
+          <Route path="/profile">
+            <ProFilePage />
           </Route>
           <Route path="/">
             <HomePage />
