@@ -7,6 +7,8 @@ import { actFetchChangeImageAsync } from "../../store/user/action";
 function FormUploadAvatar() {
   const dispatch = useDispatch();
   const avatarUser = useSelector((state) => state.USER.currentUser?.userAvatar);
+  const desUser = useSelector((state) => state.USER.currentUser?.description);
+
   const oldMedia = useSelector((state) => state.USER.currentUser?.media_id);
 
   const [previewImage, setPreviewImage] = useState(null);
@@ -33,7 +35,8 @@ function FormUploadAvatar() {
 
   useEffect(() => {
     setPreviewImage(avatarUser);
-  }, [avatarUser]);
+    setDes(desUser);
+  }, [avatarUser, desUser]);
 
   function handleUploadImage(e) {
     e.preventDefault();

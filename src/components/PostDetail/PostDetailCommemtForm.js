@@ -1,17 +1,33 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
+import { actFetchPostCommentParentAsyns } from "../../store/comment/actions";
+import { useState } from "react";
 
-function PostDetailCommemtForm() {
+function PostDetailCommemtForm({ parent = 0, postID, firstTotal  }) {
+  const dispatch = useDispatch();
   const history = useHistory();
   const location = useLocation();
   let currentUser = useSelector((state) => state.USER.currentUser);
 
-  function handleLogin() {
-    history.push(`/login?next=${location.pathname}`);
+  const [commment, setComment] = useState("");
+
+  function handleOnchangeComment(e) {
+    setComment(e.target.value);
   }
 
-  function handlePostComment() {
-    alert("chưa làm");
+  function handleLogin() {
+    history.push(`/login`, { from: location.pathname });
+  }
+
+  function handlePostComment(e) {
+    e.preventDefault();
+    let dataCommments = {
+      author: currentUser.id,
+      content: commment,
+      post: postID,
+      parent: parent,
+    };
+    dispatch(actFetchPostCommentParentAsyns(dataCommments, firstTotal ));
   }
 
   return (
@@ -22,7 +38,7 @@ function PostDetailCommemtForm() {
             <img src="/assets/images/avatar1.jpg" alt="" />
           </a>
         </div>
-        <textarea />
+        <textarea value={commment} onChange={handleOnchangeComment} />
       </div>
       <div className="text-right">
         {currentUser ? (

@@ -29,7 +29,6 @@ function FormChangePasswork() {
       if (res.ok) {
         setMessageSusscess("Cập nhập thành công ❤");
       } else {
-        console.log("ui", res);
         setMessageError(res.message);
       }
       setLoaing(true);

@@ -142,11 +142,12 @@
   text-align: center;
   margin-top: 25px;
   cursor: pointer;
+  border-radius: 3px;
 }
 .load-comment:hover {
   opacity: 0.7;
 }
 
 .load-comment a {
-  color: red;
+  color: #5a67d8;
 }

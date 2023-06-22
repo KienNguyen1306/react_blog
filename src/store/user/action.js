@@ -95,7 +95,7 @@ export function actUploadUser(currentUser) {
   };
 }
 
-// change password
+// change image
 export function actFetchChangeImageAsync(formData, des = "", oldMedia) {
   return async (dispatch) => {
     try {

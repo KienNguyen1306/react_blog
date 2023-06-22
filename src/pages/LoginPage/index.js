@@ -11,16 +11,23 @@ function LoginPage() {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const location = useLocation();
-  const nextPage = getQueryStr("next", location.search);
+  console.log(history.location);
 
+  const location = useLocation();
+  // const nextPage = getQueryStr("next", location.search);
+  const nextPage = history.location.state?.from;
+
+  console.log("nextPage", nextPage);
 
   const token = useSelector((state) => state.USER.token);
 
   if (token) {
     history.push("/");
   }
-  const [dataForm, setDataForm] = useState({ username: "", password: "" });
+  const [dataForm, setDataForm] = useState({
+    username: "admin",
+    password: "123123",
+  });
   const [message, setMessage] = useState("");
 
   // handleOnchange
@@ -61,6 +68,7 @@ function LoginPage() {
                   placeholder="Nhập tên đăng nhập ..."
                   autoComplete="off"
                   onChange={handleOnchange}
+                  value={dataForm.username}
                 />
                 <Input
                   name="password"
@@ -69,6 +77,7 @@ function LoginPage() {
                   placeholder="Nhập mật khẩu của bạn ..."
                   autoComplete="new-password"
                   onChange={handleOnchange}
+                  value={dataForm.password}
                 />
 
                 <div className="d-flex tcl-jc-between tcl-ais-center">

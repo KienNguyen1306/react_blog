@@ -10,7 +10,10 @@ function PostDetaiCommentItem({ data }) {
     (state) => state.COMMENT.dataChildComment
   );
 
+  const postID = useSelector((state) => state.POST.postDetail.id);
+
   if (!data) return <></>;
+
   const dataChildCommentId = dataChildComment[data.id];
   const { list, currentPage, totalItem } = dataChildCommentId || {
     list: [],
@@ -67,7 +70,13 @@ function PostDetaiCommentItem({ data }) {
           />
         )}
 
-        {showForm && <PostDetailCommemtForm />}
+        {showForm && (
+          <PostDetailCommemtForm
+            parent={data.id}
+            postID={postID}
+            firstTotal={totalItem}
+          />
+        )}
       </li>
     </>
   );

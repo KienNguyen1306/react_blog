@@ -107,7 +107,7 @@ export function actFetchCaterogyPost(posts) {
 export function actFetchCaterogyPostAsync(slug) {
   return async (dispatch) => {
     const res = await postService.getCaterogyID(slug);
-    
+
     const caterogyID = res.data[0].id;
     const postCaterogy = await postService.getPostCaterogy(caterogyID);
 

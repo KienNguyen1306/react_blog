@@ -24,7 +24,7 @@ function PostDetailComments() {
   return (
     <>
       <div className="post-detail__comments">
-        <PostDetailCommemtForm />
+        <PostDetailCommemtForm postID={postID}/>
         <p>{totalItem} Comments</p>
 
         {list.length > 0 && (

@@ -13,14 +13,27 @@ function PostDetailCommentAction({
   const dispatch = useDispatch();
   const postID = useSelector((state) => state.POST.postDetail.id);
 
+  const excludeIDComment = useSelector(
+    (state) => state.COMMENT.dataParentComment.exclude
+  );
+
+  const excludeIDCommentchild = useSelector(
+    (state) => state.COMMENT.dataChildComment
+  );
+
+  console.log("parent", parent);
+  console.log("exclude", excludeIDCommentchild[parent - 1]?.exclude);
+  console.log("excludeIDCommentchild", excludeIDCommentchild);
+
   function handleSeeMore(e) {
     e.preventDefault();
     setLoading(false);
     dispatch(
       actFetchCommentsAsync({
-        post: postID,
+        postId: postID,
         parent,
         currentPage: currentPage + 1,
+        exclude: postID === 0 ? excludeIDComment.join(",") : "",
       })
     ).then(() => {
       setLoading(true);

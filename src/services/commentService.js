@@ -11,6 +11,9 @@ const commentService = {
       },
     });
   },
+  postComment: function (data) {
+    return API.callWithToken().post("/wp/v2/comments", data);
+  },
 };
 
 export default commentService;
