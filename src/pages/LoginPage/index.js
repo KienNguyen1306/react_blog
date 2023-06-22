@@ -10,14 +10,9 @@ import { getQueryStr } from "../../helpers";
 function LoginPage() {
   const dispatch = useDispatch();
   const history = useHistory();
-
-  console.log(history.location);
-
   const location = useLocation();
   // const nextPage = getQueryStr("next", location.search);
   const nextPage = history.location.state?.from;
-
-  console.log("nextPage", nextPage);
 
   const token = useSelector((state) => state.USER.token);
 
