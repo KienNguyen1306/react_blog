@@ -42,6 +42,11 @@ function commentReducer(state = initState, action) {
 
     case ACT_FETCH_COMMENTS_CHILD:
       const parent = action.payload.parent;
+      let isParent = state.dataChildComment[parent];
+      let list = [];
+      if (state.dataChildComment[parent]) {
+        list = [...state.dataChildComment[parent].list];
+      }
       return {
         ...state,
         dataChildComment: {
@@ -49,14 +54,20 @@ function commentReducer(state = initState, action) {
           [parent]: {
             list:
               action.payload.currentPage === 1
-                ? action.payload.list
+                ? [...list, ...action.payload.list]
                 : [
-                    ...state.dataChildComment[parent].list,
                     ...action.payload.list,
+                    ...state.dataChildComment[parent].list,
                   ],
             currentPage: action.payload.currentPage,
             totalPages: action.payload.totalPages,
-            totalItem: action.payload.totalItem,
+            totalItem: !isParent
+              ? action.payload.totalItem
+              : action.payload.totalItem +
+                state.dataChildComment[parent].exclude.length,
+            exclude: isParent
+              ? [...state.dataChildComment[parent].exclude]
+              : [],
           },
         },
       };
@@ -94,7 +105,12 @@ function commentReducer(state = initState, action) {
             totalItem: isParentID
               ? state.dataChildComment[parentID].totalItem + 1
               : action.payload.firstTotal + 1,
-            exclude: isParentID ? "" : [action.payload.comments.id],
+            exclude: isParentID
+              ? [
+                  action.payload.comments.id,
+                  ...state.dataChildComment[parentID].exclude,
+                ]
+              : [action.payload.comments.id],
           },
         },
       };

@@ -21,10 +21,6 @@ function PostDetailCommentAction({
     (state) => state.COMMENT.dataChildComment
   );
 
-  console.log("parent", parent);
-  console.log("exclude", excludeIDCommentchild[parent - 1]?.exclude);
-  console.log("excludeIDCommentchild", excludeIDCommentchild);
-
   function handleSeeMore(e) {
     e.preventDefault();
     setLoading(false);
@@ -33,7 +29,10 @@ function PostDetailCommentAction({
         postId: postID,
         parent,
         currentPage: currentPage + 1,
-        exclude: postID === 0 ? excludeIDComment.join(",") : "",
+        exclude:
+          postID === 0
+            ? excludeIDComment.join(",")
+            : excludeIDCommentchild[parent]?.exclude.join(","),
       })
     ).then(() => {
       setLoading(true);
