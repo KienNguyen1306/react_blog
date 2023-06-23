@@ -80,7 +80,7 @@ export function mappingCommetData(item) {
     userAvatar: item.author_data.avatar || item.author_avatar_urls["48"],
     userName: item.author_name,
     replyCommentCount: item.comment_reply_count,
-    time: item.date_gmt,
+    time: item.date,
   };
 }
 

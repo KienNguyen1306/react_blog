@@ -36,7 +36,6 @@ function commentReducer(state = initState, action) {
             action.payload.currentPage === 1
               ? action.payload.totalItem
               : state.dataParentComment.totalItem,
-          exclude: [],
         },
       };
 

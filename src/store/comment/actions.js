@@ -93,21 +93,21 @@ export function actFetchPostCommentParent(comments) {
 }
 
 //post comment parent
-export function actFetchPostCommentParentAsyns(data, firstTotal ) {
+export function actFetchPostCommentParentAsyns(data, firstTotal) {
   return async (dispatch) => {
     const res = await commentService.postComment(data);
     const list = mappingCommetData(res.data);
     if (data.parent === 0) {
       dispatch(actFetchPostCommentParent(list));
     } else {
-      dispatch(actFetchPostCommentChild(data.parent, list, firstTotal ));
+      dispatch(actFetchPostCommentChild(data.parent, list, firstTotal));
     }
   };
 }
 
-export function actFetchPostCommentChild(parent, comments, firstTotal ) {
+export function actFetchPostCommentChild(parent, comments, firstTotal) {
   return {
     type: ACT_FETCH_POST_COMMENTS_CHILD,
-    payload: { parent, comments, firstTotal  },
+    payload: { parent, comments, firstTotal },
   };
 }

@@ -42,7 +42,6 @@ export function actRegisterAsync(data) {
       dispatch(actLoginAsync(dataUser));
       return { ok: true };
     } catch (error) {
-      console.log(error);
       return { ok: false, message: "Thông tin không hợp lệ" };
     }
   };
@@ -78,10 +77,10 @@ export function actFetchChangePasswordAsync(data) {
   return async (dispatch) => {
     try {
       const response = await userService.changePassword(data);
-      console.log("ok", response);
+      
       return { ok: true, message: "Cập nhập thành công" };
     } catch (error) {
-      console.log("error", error);
+      
       return { ok: false, ...error.response.data };
     }
   };

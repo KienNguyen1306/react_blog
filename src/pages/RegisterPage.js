@@ -24,7 +24,6 @@ function RegisterPage() {
 
   function handleRegister(e) {
     e.preventDefault();
-    console.log("dataForm", dataForm);
     dispatch(actRegisterAsync(dataForm)).then((res) => {
       if (res.ok) {
         history.push("/");

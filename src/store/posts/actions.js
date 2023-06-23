@@ -111,9 +111,9 @@ export function actFetchCaterogyPostAsync(slug) {
     const caterogyID = res.data[0].id;
     const postCaterogy = await postService.getPostCaterogy(caterogyID);
 
-    console.log("postCaterogy", postCaterogy);
+    
     const data = postCaterogy.data.map(mappingPostData);
-    console.log("caterogy", data);
+  
     dispatch(actFetchCaterogyPost(data));
   };
 }
