@@ -1,4 +1,4 @@
-import './footer.css'
+import "./footer.css";
 
 function Footer() {
   return (
@@ -11,7 +11,7 @@ function Footer() {
               <div className="footer-logo">
                 <img src="/assets/images/logo.png" alt="NuxtBlog Logo" />
               </div>
-              <p>© 2020, All Rights Reserved.</p>
+              <p>© 2023, All Rights Reserved.</p>
             </div>
             {/* Footer Column */}
             <div className="tcl-col-12 tcl-col-sm-6 tcl-col-md-4 tcl-col-lg-2">
@@ -19,10 +19,18 @@ function Footer() {
                 <p>Categories</p>
               </div>
               <ul className="footer-content__list">
-                <li><a href="/">ReactJs</a></li>
-                <li><a href="/">Javascript</a></li>
-                <li><a href="/">Angular</a></li>
-                <li><a href="/">HTML, HTML5</a></li>
+                <li>
+                  <a href="/">ReactJs</a>
+                </li>
+                <li>
+                  <a href="/">Javascript</a>
+                </li>
+                <li>
+                  <a href="/">Angular</a>
+                </li>
+                <li>
+                  <a href="/">HTML, HTML5</a>
+                </li>
               </ul>
             </div>
             {/* Footer Column */}
@@ -31,8 +39,8 @@ function Footer() {
                 <p>Liên hệ</p>
               </div>
               <ul className="footer-content__list">
-                <li>Số 01, Khối A1, Toà nhà Đạt Gia, 43 Đường Cây Keo, Tam Phú, Thủ Đức, Hồ Chí Minh</li>
-                <li>0383 308 983</li>
+                <li>261/15/4 đường Đình Phong Phú, quận 9, Hồ Chí Minh</li>
+                <li>0382185674</li>
               </ul>
             </div>
             {/* Footer Column */}
@@ -41,10 +49,19 @@ function Footer() {
                 <p>Fanpage</p>
               </div>
               <div className="footer-facebook">
-                <div className="fb-page" data-href="/" data-tabs data-width data-height data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
+                <div
+                  className="fb-page"
+                  data-href="/"
+                  data-tabs
+                  data-width
+                  data-height
+                  data-small-header="false"
+                  data-adapt-container-width="true"
+                  data-hide-cover="false"
+                  data-show-facepile="true"
+                >
                   <blockquote cite="/" className="fb-xfbml-parse-ignore">
-                    <a href="/">Học Lập Trình Web Thông Qua
-                      Projects Thực Tế</a>
+                    <a href="/">Học Lập Trình Web Thông Qua Projects Thực Tế</a>
                   </blockquote>
                 </div>
               </div>
@@ -53,8 +70,7 @@ function Footer() {
         </div>
       </div>
     </footer>
-
-  )
+  );
 }
 
-export default Footer
+export default Footer;
