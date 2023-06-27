@@ -9,6 +9,7 @@ import {
   actFetchArticlesPagingAsync,
   actFetchArticlesPopularAsync,
 } from "../store/posts/actions";
+import Skeleton from "../components/Skeleton";
 
 function HomePage() {
   let dispatch = useDispatch();
@@ -24,6 +25,7 @@ function HomePage() {
       <ArticleLatest />
       <ArticlePopular />
       <ArticleGeneral />
+      <Skeleton isShowCategoies isStyleCard isShowAvatar />
     </>
   );
 }

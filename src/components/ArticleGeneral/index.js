@@ -1,10 +1,28 @@
 import ArticleItem from "../ArticleItem";
 import MainTitle from "../shared/MainTitle";
 import usePostPaging from "../../hooks/usePostPaging";
+import Skeleton from "../Skeleton";
 
 function ArticleGeneral() {
   const { lists, renderButtonLoadMore } = usePostPaging();
 
+  if (lists.length === 0) {
+    return (
+      <div className="articles-list section">
+        <div className="tcl-container">
+          <MainTitle btnLabel="Xem them">Bài Viết Tổng Hợp</MainTitle>
+          <div className="tcl-row">
+            <div className="tcl-col-12 tcl-col-md-6">
+              <Skeleton isShowCategoies isStyleCard />
+            </div>
+            <div className="tcl-col-12 tcl-col-md-6">
+              <Skeleton isShowCategoies isStyleCard />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="articles-list section">
       <div className="tcl-container">

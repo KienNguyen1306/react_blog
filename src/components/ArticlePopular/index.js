@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import ArticleItem from "../ArticleItem";
 import "./popular-news-list.css";
+import Skeleton from "../Skeleton";
 
 function ArticlePopular() {
   let listPopular = useSelector((state) => state.POST.listPopular);
@@ -20,22 +21,40 @@ function ArticlePopular() {
           <div className="popular-news__list--left">
             <div className="popular-news__list--row">
               <div className="popular-news__list--card">
-                <ArticleItem
-                  item={listPopular[0]}
-                  isStyleCard
-                  isShowCategoies
-                  isShowDesc
-                />
+                {listPopular.length > 0 ? (
+                  <ArticleItem
+                    item={listPopular[0]}
+                    isStyleCard
+                    isShowCategoies
+                    isShowDesc
+                  />
+                ) : (
+                  <Skeleton
+                    isStyleCard
+                    isShowCategoies
+                    isShowDesc
+                    isShowAvatar
+                  />
+                )}
               </div>
             </div>
             <div className="popular-news__list--row">
               <div className="popular-news__list--card">
-                <ArticleItem
-                  item={listPopular[1]}
-                  isStyleCard
-                  isShowCategoies
-                  isShowDesc
-                />
+                {listPopular.length > 0 ? (
+                  <ArticleItem
+                    item={listPopular[1]}
+                    isStyleCard
+                    isShowCategoies
+                    isShowDesc
+                  />
+                ) : (
+                  <Skeleton
+                    isStyleCard
+                    isShowCategoies
+                    isShowDesc
+                    isShowAvatar
+                  />
+                )}
               </div>
             </div>
           </div>
@@ -43,12 +62,16 @@ function ArticlePopular() {
             <div className="popular-news__list--row">
               {/* Popular news card */}
               <div className="popular-news__list--card">
-                <ArticleItem
-                  item={listPopular[2]}
-                  isStyleCard
-                  isStyleRow
-                  isShowDesc
-                />
+                {listPopular.length > 0 ? (
+                  <ArticleItem
+                    item={listPopular[2]}
+                    isStyleCard
+                    isStyleRow
+                    isShowDesc
+                  />
+                ) : (
+                  <Skeleton isStyleCard isStyleRow isShowDesc isShowAvatar />
+                )}
               </div>
               {/* End Popular news card */}
             </div>
