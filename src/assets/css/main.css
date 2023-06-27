@@ -137,3 +137,7 @@ body {
 .latest-news__card.with100 {
   min-width: 100% !important;
 }
+
+.caterogy-page {
+  padding: 30px;
+}

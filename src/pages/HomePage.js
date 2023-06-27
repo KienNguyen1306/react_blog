@@ -25,7 +25,6 @@ function HomePage() {
       <ArticleLatest />
       <ArticlePopular />
       <ArticleGeneral />
-      <Skeleton isShowCategoies isStyleCard isShowAvatar />
     </>
   );
 }

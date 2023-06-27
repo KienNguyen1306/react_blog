@@ -21,26 +21,28 @@ function PostCaterogy() {
   return (
     <>
       <div className="tcl-container">
-        {loading ? (
-          <div className="center_loading">
-            <IconLoading width={150} />
-          </div>
-        ) : (
-          <>
-            {caterogyPost.map((item, index) => {
-              return (
-                <div key={item.id} className="latest-news__card with100">
-                  <ArticleItem
-                    key={index}
-                    item={item}
-                    isStyleCard
-                    isShowAvatar={false}
-                  />
-                </div>
-              );
-            })}
-          </>
-        )}
+        <div className="caterogy-page">
+          {loading ? (
+            <div className="center_loading">
+              <IconLoading width={150} />
+            </div>
+          ) : (
+            <>
+              {caterogyPost.map((item, index) => {
+                return (
+                  <div key={item.id} className="latest-news__card with100">
+                    <ArticleItem
+                      key={index}
+                      item={item}
+                      isStyleCard
+                      isShowAvatar={false}
+                    />
+                  </div>
+                );
+              })}
+            </>
+          )}
+        </div>
       </div>
     </>
   );
