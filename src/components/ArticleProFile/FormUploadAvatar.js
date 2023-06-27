@@ -16,6 +16,7 @@ function FormUploadAvatar() {
   const [des, setDes] = useState("");
   const [messageError, setMessageError] = useState("");
   const [messageSusscess, setMessageSusscess] = useState("");
+  const [loading, setLoading] = useState(true);
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -40,6 +41,7 @@ function FormUploadAvatar() {
 
   function handleUploadImage(e) {
     e.preventDefault();
+    setLoading(false);
     const formData = new FormData();
     formData.append("file", imageform);
     dispatch(actFetchChangeImageAsync(formData, des, oldMedia)).then((res) => {
@@ -50,6 +52,7 @@ function FormUploadAvatar() {
       }
       setDes("");
       setImageForm(null);
+      setLoading(true);
     });
   }
 
@@ -75,9 +78,15 @@ function FormUploadAvatar() {
         )}
       </div>
       <div className="d-flex tcl-jc-between tcl-ais-center">
-        <Button type="primary" size="large">
-          SAVE
-        </Button>
+        {loading ? (
+          <Button type="primary" size="large">
+            SAVE
+          </Button>
+        ) : (
+          <Button type="primary" size="large" loading>
+            Loading
+          </Button>
+        )}
       </div>
     </form>
   );
