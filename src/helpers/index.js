@@ -1,6 +1,7 @@
 import dayjs from "dayjs";
 import "dayjs/locale/vi";
 import relativeTime from "dayjs/plugin/relativeTime";
+import avatar from "../assets/images/avatar.jpg";
 dayjs.extend(relativeTime);
 
 export function getQueryStr(name, locationSearch) {
@@ -87,8 +88,10 @@ export function mappingCommetData(item) {
 export function mappingUser(data) {
   return {
     id: data.id,
-    userAvatar: data.simple_local_avatar.full,
-    media_id: data.simple_local_avatar.media_id,
+    userAvatar: data.simple_local_avatar
+      ? data.simple_local_avatar.full
+      : avatar,
+    media_id: data.simple_local_avatar && data.simple_local_avatar.media_id,
     name: data.name,
     description: data.description,
     nickname: data.nickname,

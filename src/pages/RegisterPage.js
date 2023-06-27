@@ -16,6 +16,7 @@ function RegisterPage() {
     password: "",
   });
   const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(true);
 
   function handleOnchange(e) {
     let { name, value } = e.target;
@@ -24,12 +25,14 @@ function RegisterPage() {
 
   function handleRegister(e) {
     e.preventDefault();
+    setLoading(false);
     dispatch(actRegisterAsync(dataForm)).then((res) => {
       if (res.ok) {
         history.push("/");
       } else {
         setMessage(res.message);
       }
+      setLoading(true);
     });
   }
   return (
@@ -71,19 +74,16 @@ function RegisterPage() {
                   name="password"
                   onChange={handleOnchange}
                 />
-                <Input
-                  type="password"
-                  label="Xác nhận mật khẩu"
-                  placeholder="Xác nhận mật khẩu ..."
-                  autoComplete="new-password"
-                  name="new-password"
-                  onChange={handleOnchange}
-                />
-
                 <div className="d-flex tcl-jc-between tcl-ais-center">
-                  <Button type="primary" size="large">
-                    Đăng ký
-                  </Button>
+                  {loading ? (
+                    <Button type="primary" size="large">
+                      Đăng ký
+                    </Button>
+                  ) : (
+                    <Button type="primary" size="large" loading>
+                      loading
+                    </Button>
+                  )}
                   <Link to="/login">Bạn đã có tài khoản?</Link>
                 </div>
               </form>

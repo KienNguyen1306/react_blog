@@ -16,11 +16,12 @@ function LoginPage() {
 
   const token = useSelector((state) => state.USER.token);
 
+  const [loading, setLoading] = useState(true);
   if (token) {
     history.push("/");
   }
   const [dataForm, setDataForm] = useState({
-    username: "admin",
+    username: "kiennguyen",
     password: "123123",
   });
   const [message, setMessage] = useState("");
@@ -34,6 +35,7 @@ function LoginPage() {
   // login
   function handleLogin(e) {
     e.preventDefault();
+    setLoading(false);
     dispatch(actLoginAsync(dataForm)).then((res) => {
       if (res.ok) {
         if (nextPage) {
@@ -44,6 +46,7 @@ function LoginPage() {
       } else {
         setMessage(res.message);
       }
+      setLoading(true);
     });
   }
 
@@ -76,9 +79,15 @@ function LoginPage() {
                 />
 
                 <div className="d-flex tcl-jc-between tcl-ais-center">
-                  <Button type="primary" size="large">
-                    Đăng nhập
-                  </Button>
+                  {loading ? (
+                    <Button type="primary" size="large">
+                      Đăng nhập
+                    </Button>
+                  ) : (
+                    <Button type="primary" size="large" loading>
+                      loading
+                    </Button>
+                  )}
                   <Link to="/register">Đăng ký</Link>
                 </div>
               </form>

@@ -77,10 +77,9 @@ export function actFetchChangePasswordAsync(data) {
   return async (dispatch) => {
     try {
       const response = await userService.changePassword(data);
-      
+
       return { ok: true, message: "Cập nhập thành công" };
     } catch (error) {
-      
       return { ok: false, ...error.response.data };
     }
   };
