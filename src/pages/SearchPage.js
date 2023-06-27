@@ -8,6 +8,7 @@ import { actFetchArticlesPagingAsync } from "../store/posts/actions";
 import { useLocation } from "react-router-dom";
 
 import usePostPaging from "../hooks/usePostPaging";
+import Skeleton from "../components/Skeleton";
 
 function SearchPage() {
   const location = useLocation();
@@ -20,13 +21,31 @@ function SearchPage() {
     dispatch(actFetchArticlesPagingAsync({ inputParam }));
   }, [dispatch, queryStr]);
 
+  if (lists.length === 0) {
+    return (
+      <div className="articles-list section">
+        <div className="tcl-container">
+          <MainTitle type="search">
+            {totalItem} kết quả tìm kiếm với từ khóa "{queryStr}"
+          </MainTitle>
+          <div className="tcl-row tcl-jc-center">
+            <Skeleton
+              isStyleCard
+              isShowCategoies
+              isShowAvatar={false}
+              isShowDesc={false}
+            />
+          </div>
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="articles-list section">
       <div className="tcl-container">
         <MainTitle type="search">
           {totalItem} kết quả tìm kiếm với từ khóa "{queryStr}"
         </MainTitle>
-
         <div className="tcl-row tcl-jc-center">
           {lists.map((item) => {
             return (
