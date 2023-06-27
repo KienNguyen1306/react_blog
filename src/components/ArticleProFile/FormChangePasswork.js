@@ -28,8 +28,10 @@ function FormChangePasswork() {
     dispatch(actFetchChangePasswordAsync(formData)).then((res) => {
       if (res.ok) {
         setMessageSusscess("Cập nhập thành công ❤");
+        setMessageError("");
       } else {
         setMessageError(res.message);
+        setMessageSusscess("");
       }
       setLoaing(true);
     });
